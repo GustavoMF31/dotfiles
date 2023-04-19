@@ -143,7 +143,10 @@ nnoremap <LocalLeader>g :call CabalRun()<CR>
 set encoding=utf-8
 set hidden
 set updatetime=300
-set signcolumn=number
+
+if v:version >= 802
+  set signcolumn=number
+endif
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
