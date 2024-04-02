@@ -55,6 +55,7 @@ nnoremap M J
 "Use <Space>p to load the hierarchical editing plugin (Useful for quick debugging)
 "nnoremap <Space>p :source /home/gustavo/Desktop/Python/ast/Structured-Editor-For-Python/plugin.vim<Enter>
 
+let mapleader = ","
 let maplocalleader = " "
 
 "Opens the file that defines the data type the cursor is on top of 
@@ -83,7 +84,7 @@ nnoremap <LocalLeader>q :%!stylish-haskell<Enter>
 " Source the file telling vim to replace the idris2 command with idris2dev if
 " necessary (useful for hacking on idris)
 " https://unix.stackexchange.com/questions/550622/how-to-run-aliases-commands-in-inside-the-vim-editor
-let $BASH_ENV = "~/.vim_bash_env"
+" let $BASH_ENV = "~/.vim_bash_env"
 
 " Convenient window resizing
 nnoremap + +
@@ -136,7 +137,6 @@ endfunction
 " nnoremap <LocalLeader>g :call RunHaskellMain()<CR>
 nnoremap <LocalLeader>g :call CabalRun()<CR>
 
-
 " Some configuration options suggested by CoC at
 " https://github.com/neoclide/coc.nvim#example-vim-configuration
 
@@ -151,8 +151,17 @@ endif
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
-
+nnoremap gh :call CocActionAsync('showIncomingCalls')<CR>
+vmap <LocalLeader>f  <Plug>(coc-format-selected)
+nmap <LocalLeader>a  <Plug>(coc-codeaction-cursor)
 nnoremap <silent> gH :call <SID>show_documentation()<CR>
+nmap <LocalLeader>rn <Plug>(coc-rename)
+" nnoremap <LocalLeader>r :CocRestart<Enter>
+
+" Change the color of HLint suggestion windows' text to something more
+" readable
+highlight CocFloating ctermbg=242
+highlight CocErrorFloat ctermfg=LightRed
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -164,17 +173,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Looks like HLS doesn't support renaming
-" https://github.com/haskell/haskell-language-server/issues/282
-" nmap <leader>rn <Plug>(coc-rename)
-
-" Not sure how auto-formatting works 
-" nmap <LocalLeader>f  <Plug>(coc-format-selected)
-
-nmap <LocalLeader>a  <Plug>(coc-codeaction-selected)
-
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -184,5 +182,3 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
-
-nnoremap <LocalLeader>r :CocRestart<Enter>
