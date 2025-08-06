@@ -1,3 +1,5 @@
+set nocompatible
+
 syntax on
 filetype on
 filetype plugin indent on
@@ -11,6 +13,7 @@ set nowrap
 set incsearch
 set ignorecase
 set smartcase
+set hlsearch
 "Makes the annoying bell sound go away when sshing from windows
 set visualbell
 set t_vb=
@@ -182,3 +185,14 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
+
+colorscheme sorbet
+
+" Spell checking
+" set spell spelllang=pt_br
+" set spell spelllang=en_us
+
+" Get vim to spell-check LaTeX source too, not just comments
+" https://stackoverflow.com/questions/5860154/vim-spell-checking-comments-only-in-latex-files
+" TODO: Make this work from here. Currently, has no effect
+" syntax spell toplevel
